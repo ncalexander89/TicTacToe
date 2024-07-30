@@ -3,19 +3,23 @@
 # game.rb
 require_relative 'player'
 
-class Game < Player # rubocop:disable Style/Documentation
-  def game # rubocop:disable Metrics/MethodLength
-    board
-    loop do
-      player1_selection
-      player1_update
-      board
-      return if player1_win || draw
+class Game # rubocop:disable Style/Documentation
+  def initialize
+    @player = Player.new
+  end
 
-      player2_selection
-      player2_update
-      board
-      return if player2_win
+  def game # rubocop:disable Metrics/MethodLength
+    @player.board
+    loop do
+      @player.player1_selection
+      @player.player1_update
+      @player.board
+      return if @player.player1_win || @player.draw
+
+      @player.player2_selection
+      @player.player2_update
+      @player.board
+      return if @player.player2_win
     end
   end
 end

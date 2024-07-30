@@ -15,8 +15,6 @@ class Player # rubocop:disable Style/Documentation
     @turn = 0
   end
 
-  private
-
   def board
     puts "
     #{@array[0]}  |  #{@array[1]}  |  #{@array[2]}
