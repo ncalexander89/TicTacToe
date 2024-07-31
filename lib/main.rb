@@ -3,6 +3,5 @@
 # main.rb
 require_relative 'game'
 
-include Rules # rubocop:disable Style/MixinUsage
-
-Game.new.game
+start = Game.new
+start.game
