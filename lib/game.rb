@@ -38,8 +38,8 @@ class Game # rubocop:disable Style/Documentation
   def player_input(player_number)
     puts "Player #{player_number} select your position"
     loop do
-      selection = gets.chomp.to_i
-      return selection if @array.include?(selection)
+      @selection = gets.chomp.to_i
+      return @selection if @array.include?(@selection)
 
       puts 'Enter a valid number'
     end
