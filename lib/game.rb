@@ -8,7 +8,7 @@ require 'pry'
 class Game # rubocop:disable Style/Documentation
   include Rules
 
-  attr_accessor :board, :array, :p1_array, :turn
+  attr_accessor :array, :p1_array, :turn, :p2_array
 
   def initialize
     @p1_array = []
@@ -17,7 +17,7 @@ class Game # rubocop:disable Style/Documentation
     @array = [1, 2, 3, 4, 5, 6, 7, 8, 9]
   end
 
-  def board # rubocop:disable Lint/DuplicateMethods
+  def board
     puts "
     #{@array[0]}  |  #{@array[1]}  |  #{@array[2]}
   -----+-----+-----
