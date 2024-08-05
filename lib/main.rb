@@ -3,5 +3,4 @@
 # main.rb
 require_relative 'game'
 
-start = Game.new
-start.game
+Game.new.game

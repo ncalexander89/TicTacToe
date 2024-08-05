@@ -8,14 +8,13 @@ require 'pry'
 class Game # rubocop:disable Style/Documentation
   include Rules
 
-  attr_accessor :board, :array, :player
+  attr_accessor :board, :array, :p1_array, :turn
 
   def initialize
-    @array = [1, 2, 3, 4, 5, 6, 7, 8, 9]
     @p1_array = []
     @p2_array = []
     @turn = 1
-    puts board
+    @array = [1, 2, 3, 4, 5, 6, 7, 8, 9]
   end
 
   def board # rubocop:disable Lint/DuplicateMethods
@@ -54,29 +53,31 @@ class Game # rubocop:disable Style/Documentation
     end
   end
 
-  def player_win # rubocop:disable Metrics/CyclomaticComplexity,Metrics/MethodLength
+  def player_win # rubocop:disable Metrics/CyclomaticComplexity,Metrics/MethodLength,Metrics/PerceivedComplexity
     WINNING_ARRAY.any? do |win|
-      if @turn.odd? && win.all? { |p| @p1_array.include?(p) }
+      if @turn.odd? && win.all? { |win_array| @p1_array.include?(win_array) }
         puts 'Player 1 Wins!'
-        return true
-      end
-      if @turn.even? && win.all? { |p| @p2_array.include?(p) }
+        true
+      elsif @turn.even? && win.all? { |win_array| @p2_array.include?(win_array) }
         puts 'Player 2 Wins!'
-        return true
+        true
+      else
+        false
       end
-      false
     end
   end
 
   def draw
     if @turn == 9
       puts 'Draw Game!'
-      return true
+      true
+    else
+      false
     end
-    false
   end
 
   def game
+    board
     loop do
       @selection = @turn.odd? ? player_input(1) : player_input(2)
       player_selection(@selection)
