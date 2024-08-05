@@ -63,10 +63,23 @@ describe Game do # rubocop:disable Metrics/BlockLength
         selection = game.player_input(1)
         expect(game.array.include?(selection))
       end
+      it 'Puts Enter a Valid number if player 1 input not available in array' do
+        allow(game).to receive(:gets).and_return('10', '4') # Simulate invalid and then valid input
+        expect(game).to receive(:puts).with('Enter a valid number')
+        selection = game.player_input(1) # Run the player_input method
+        expect(selection).to eq(4) # Expect the valid selection to be returned
+      end
+
       it 'Returns player 2s input if it is available in array' do
         allow(game).to receive(:gets).and_return('4')
         selection = game.player_input(2)
         expect(game.array.include?(selection))
+      end
+      it 'Puts Enter a Valid number if player 2 input not available in array' do
+        allow(game).to receive(:gets).and_return('c', '2') # Simulate invalid and then valid input
+        expect(game).to receive(:puts).with('Enter a valid number')
+        selection = game.player_input(2) # Run the player_input method
+        expect(selection).to eq(2) # Expect the valid selection to be returned
       end
     end
   end
