@@ -8,7 +8,7 @@ describe Game do # rubocop:disable Metrics/BlockLength
   before do
     allow(game).to receive(:puts) # Avoid actual printing to console
   end
-  describe 'Game Win' do
+  describe 'Player Win' do
     context 'When winning array includes players array' do
       it 'Displays player 1 as the winner and ends the game' do
         expect(game.turn).to be_odd
@@ -56,12 +56,14 @@ describe Game do # rubocop:disable Metrics/BlockLength
       end
     end
   end
-  describe 'Player Input' do
+  describe 'Player Input' do # rubocop:disable Metrics/BlockLength
     context 'When its players turn' do
       it 'Returns player 1s input if it is available in array' do
         allow(game).to receive(:gets).and_return('5')
-        selection = game.player_input(1)
-        expect(game.array.include?(selection))
+        expect(game).to receive(:puts).with('Player 1 select your position')
+        input_selection = game.player_input(1)
+        expect(input_selection).to eq(5)
+        expect(game.array.include?(input_selection))
       end
       it 'Puts Enter a Valid number if player 1 input not available in array' do
         allow(game).to receive(:gets).and_return('10', '4') # Simulate invalid and then valid input
